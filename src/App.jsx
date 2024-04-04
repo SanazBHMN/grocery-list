@@ -1,7 +1,15 @@
+import { useState } from "react";
 import "./App.css";
 import groceryCartImg from "./assets/grocery-cart.jpg";
 
 function App() {
+  const [inputValue, setInputValue] = useState("");
+
+  const handleChangeInputValue = (e) => {
+    console.log(e.target.value);
+    setInputValue(e.target.value);
+  };
+
   return (
     <main className="app">
       <div>
@@ -12,10 +20,10 @@ function App() {
             <img src={groceryCartImg} alt="grocery cart" />
             <input
               type="text"
-              name=""
-              id=""
               placeholder="Add an item"
               className="item-input"
+              value={inputValue}
+              onChange={handleChangeInputValue}
             />
           </div>
         </div>

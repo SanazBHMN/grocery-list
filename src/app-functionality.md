@@ -1,0 +1,5 @@
+- Type into the input element
+- Press enter to add new item
+- Delete an item
+- Mark an item as done
+- Conditionally show success message if all item are done
