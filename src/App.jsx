@@ -62,7 +62,10 @@ function App() {
             <li key={index}>
               <div className="container">
                 <input type="checkbox" name="" id="" />
-                <p>{item.name}</p>
+                <p>
+                  {item.name}{" "}
+                  {item.quantity > 1 && <span>x{item.quantity}</span>}
+                </p>
               </div>
               <div>
                 <button className="remove-button">X</button>
