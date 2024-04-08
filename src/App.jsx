@@ -48,8 +48,8 @@ function App() {
           </div>
         </div>
         <ul>
-          {groceryItems.map((item) => (
-            <li>
+          {groceryItems.map((item, index) => (
+            <li key={index}>
               <div className="container">
                 <input type="checkbox" name="" id="" />
                 <p>{item.name}</p>
