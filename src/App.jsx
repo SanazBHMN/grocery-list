@@ -14,15 +14,25 @@ function App() {
   const handleAddGroceryItem = (e) => {
     if (e.key === "Enter") {
       // console.log("Enter was pressed");
+
       if (inputValue) {
-        setGroceryItems([
-          ...groceryItems,
-          {
+        const updatedGroceryList = [...groceryItems];
+
+        const itemIndex = updatedGroceryList.findIndex(
+          (item) => item.name === inputValue
+        );
+
+        if (itemIndex === -1) {
+          updatedGroceryList.push({
             name: inputValue,
             quantity: 1,
             completed: false,
-          },
-        ]);
+          });
+        } else {
+          updatedGroceryList[itemIndex].quantity++;
+        }
+
+        setGroceryItems(updatedGroceryList);
         setInputValue("");
       }
     }
