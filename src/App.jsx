@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import groceryCartImg from "./assets/grocery-cart.jpg";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [groceryItems, setGroceryItems] = useState([]);
+  const [isCompleted, setIsCompleted] = useState(false);
+
+  useEffect(() => {
+    determineCompletedStatus();
+  }, [groceryItems]);
 
   const handleChangeInputValue = (e) => {
     // console.log(e.target.value);
@@ -45,6 +50,7 @@ function App() {
     );
 
     setGroceryItems(updatedGroceryList);
+    determineCompletedStatus();
   };
 
   const handleUpdateCompleteStatus = (status, index) => {
@@ -54,11 +60,25 @@ function App() {
     setGroceryItems(updatedGroceryList);
   };
 
+  const determineCompletedStatus = () => {
+    if (!groceryItems.length) {
+      return setIsCompleted(false);
+    }
+
+    let isAllCompleted = true;
+
+    groceryItems.forEach((item) => {
+      if (!item.completed) isAllCompleted = false;
+    });
+
+    setIsCompleted(isAllCompleted);
+  };
+
   return (
     <main className="app">
       <div>
         <div>
-          <h4 className="success">You're Done</h4>
+          {isCompleted && <h4 className="success">You're Done</h4>}
           {/* {JSON.stringify(groceryItems)} */}
           <div className="header">
             <h1>Shopping List</h1>
