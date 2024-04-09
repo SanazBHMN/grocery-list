@@ -38,6 +38,22 @@ function App() {
     }
   };
 
+  const handleRemoveGroceryItem = (name) => {
+    // console.log(name);
+    const updatedGroceryList = [...groceryItems].filter(
+      (item) => item.name !== name
+    );
+
+    setGroceryItems(updatedGroceryList);
+  };
+
+  const handleUpdateCompleteStatus = (status, index) => {
+    const updatedGroceryList = [...groceryItems];
+    updatedGroceryList[index].completed = status;
+
+    setGroceryItems(updatedGroceryList);
+  };
+
   return (
     <main className="app">
       <div>
@@ -61,14 +77,26 @@ function App() {
           {groceryItems.map((item, index) => (
             <li key={index}>
               <div className="container">
-                <input type="checkbox" name="" id="" />
+                <input
+                  type="checkbox"
+                  onChange={(e) => {
+                    handleUpdateCompleteStatus(e.target.checked, index);
+                  }}
+                  value={item.completed}
+                  checked={item.completed}
+                />
                 <p>
                   {item.name}{" "}
                   {item.quantity > 1 && <span>x{item.quantity}</span>}
                 </p>
               </div>
               <div>
-                <button className="remove-button">X</button>
+                <button
+                  className="remove-button"
+                  onClick={() => handleRemoveGroceryItem(item.name)}
+                >
+                  X
+                </button>
               </div>
             </li>
           ))}
